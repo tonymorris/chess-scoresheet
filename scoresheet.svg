@@ -16,10 +16,6 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="scoresheet.svg">
-  <title
-     id="title3514">Chess Score Sheet</title>
-  <defs
-     id="defs3489" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -31,13 +27,22 @@
      inkscape:cx="375"
      inkscape:cy="520"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="svg3487"
      showgrid="false"
      inkscape:window-width="1680"
      inkscape:window-height="983"
      inkscape:window-x="0"
      inkscape:window-y="44"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0">
+    <sodipodi:guide
+       id="guide3376"
+       position="526.1811,0"
+       orientation="744.0945,0" />
+  </sodipodi:namedview>
+  <title
+     id="title3514">Chess Score Sheet</title>
+  <defs
+     id="defs3489" />
   <metadata
      id="metadata3492">
     <rdf:RDF>
@@ -80,8 +85,8 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
+     transform="translate(0,-308.26772)"
      id="layer1"
-     transform="translate(0,-308.26772)" />
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1" />
 </svg>
