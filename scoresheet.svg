@@ -9,13 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 744.09448819 1052.3622047"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 1052.3622 744.09448"
    id="svg3487"
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="scoresheet.svg">
+  <title
+     id="title3514">Chess Score Sheet</title>
   <defs
      id="defs3489" />
   <sodipodi:namedview
@@ -44,12 +46,42 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title>Chess Score Sheet</dc:title>
+        <dc:date>February 2015</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Tony Morris</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Tony Morris</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Tony Morris</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:source>https://github.com/tonymorris/chess-score</dc:source>
+        <dc:language>English</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Chess</rdf:li>
+            <rdf:li>Scoresheet</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Tony Morris</dc:title>
+          </cc:Agent>
+        </dc:contributor>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1" />
+     id="layer1"
+     transform="translate(0,-308.26772)" />
 </svg>
