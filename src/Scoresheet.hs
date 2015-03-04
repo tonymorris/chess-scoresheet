@@ -1,7 +1,7 @@
 module Main where
 
 import Data.Chess.Scoresheet
-import Diagrams.Backend.SVG.CmdLine
+import Diagrams.Backend.Cairo.CmdLine
 import System.IO(IO)
 
 main ::
