@@ -27,6 +27,7 @@ library
 
   build-depends:
                       base             >= 3   && < 5
+                    , colour           >= 2.3
                     , diagrams         >= 1.1
                     , diagrams-contrib >= 1.1
                     , diagrams-core    >= 1.1
@@ -57,6 +58,7 @@ executable circle
 
   build-depends:
                       base             >= 3   && < 5
+                    , colour           >= 2.3
                     , diagrams         >= 1.1
                     , diagrams-contrib >= 1.1
                     , diagrams-core    >= 1.1
@@ -81,6 +83,7 @@ executable example
 
   build-depends:
                       base             >= 3   && < 5
+                    , colour           >= 2.3
                     , diagrams         >= 1.1
                     , diagrams-contrib >= 1.1
                     , diagrams-core    >= 1.1

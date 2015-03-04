@@ -2,6 +2,7 @@ module Data.Chess.Scoresheet where
 
 import Diagrams.Prelude
 import Diagrams.Backend.SVG
+import Data.Colour.SRGB
 import Data.List
 import Prelude
 
@@ -45,10 +46,12 @@ example =
 row ::
   Diagram B R2
 row =
-  let number = rect 2 2
-      move = rect 6 2
-      time = rect 3 2
-  in number ||| move ||| time ||| move ||| time
+  let numbertext n = text (show n) # alignR # font "DejaVu Sans Mono" # fontSizeN 0.15 # fc white -- how to right-align
+      number n = numbertext n <> rect 2 2 # fc darkblue # lc (sRGB24 217 217 217) # lc darkblue
+      whitemove = rect 6 2 # lc darkblue
+      blackmove = rect 6 2 # fc (sRGB24 192 192 192) # lc darkblue
+      time = text ":" # fc darkblue <> rect 3 2 # fc (sRGB24 217 217 217) # lc darkblue
+  in number (12 :: Int) ||| whitemove ||| time ||| blackmove ||| time
 
 scoresheet ::
   Diagram B R2
