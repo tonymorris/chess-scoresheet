@@ -7,4 +7,4 @@ import System.IO(IO)
 main ::
   IO ()
 main =
-  mainWith row
+  mainWith scoresheet
