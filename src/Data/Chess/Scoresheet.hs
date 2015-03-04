@@ -39,3 +39,14 @@ example ::
 example =
   tournament 6 #
   connectOutside' (with & gaps .~ small & headLength .~ Global 0.2) (1 :: Int) (2 :: Int)
+
+row ::
+  Diagram B R2
+row =
+  rect 3 3
+
+scoresheet ::
+  Diagram B R2
+scoresheet =
+  row
+  
