@@ -48,10 +48,10 @@ row ::
   -> Diagram B R2
 row r =
   let numbertext n = alignedText 1 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.04 # fc white
-      number n = numbertext n <> rect 2 2 # alignR # fc darkblue # lc (sRGB24 217 217 217) # lc darkblue
-      whitemove = rect 6 2 # lc darkblue
-      blackmove = rect 6 2 # fc (sRGB24 192 192 192) # lc darkblue
-      time = text ":" # fc darkblue <> rect 3 2 # fc (sRGB24 217 217 217) # lc darkblue
+      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc (sRGB24 217 217 217)
+      whitemove = rect 60 20 # lc darkblue
+      blackmove = rect 60 20 # fc (sRGB24 192 192 192) # lc darkblue
+      time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc (sRGB24 217 217 217) # lc darkblue
   in number r ||| whitemove ||| time ||| blackmove ||| time
 
 rowsLeft ::
