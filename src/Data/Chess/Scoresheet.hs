@@ -6,6 +6,10 @@ import Data.Colour.SRGB
 import Data.List
 import Prelude
 
+{-
+
+-- examples for learning diagrams
+
 circ ::
   Diagram B R2
 circ =
@@ -41,7 +45,7 @@ example =
   tournament 6 #
   connectOutside' (with & gaps .~ small & headLength .~ Global 0.2) (1 :: Int) (2 :: Int)
 
-----
+-}
 
 row ::
   Int
