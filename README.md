@@ -1,5 +1,6 @@
 Chess Score Sheet
 -----------------
 
-Adapted from Bob Newell's work.
+A chess scoresheet, written using the `diagrams` package.
 
+http://hackage.haskell.org/package/diagrams
