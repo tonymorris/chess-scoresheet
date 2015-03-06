@@ -1,4 +1,4 @@
-name:               chess-score
+name:               chess-scoresheet
 version:            0.0.1
 license:            BSD3
 license-file:       LICENCE
@@ -8,15 +8,15 @@ copyright:          Copyright (C) 2015 Tony Morris
 synopsis:           A chess score sheet
 category:           Data
 description:        A chess score sheet
-homepage:           https://github.com/tonymorris/chess-score
-bug-reports:        https://github.com/tonymorris/chess-score/issues
+homepage:           https://github.com/tonymorris/chess-scoresheet
+bug-reports:        https://github.com/tonymorris/chess-scoresheet/issues
 cabal-version:      >= 1.10
 build-type:         Custom
 extra-source-files: changelog
 
 source-repository   head
   type:             git
-  location:         git@github.com:tonymorris/chess-score.git
+  location:         git@github.com:tonymorris/chess-scoresheet.git
 
 flag                small_base
   description:      Choose the new, split-up base package.
