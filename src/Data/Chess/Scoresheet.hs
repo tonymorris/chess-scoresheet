@@ -67,6 +67,11 @@ rowsLeft ::
 rowsLeft =
   foldr (\a d -> row a === d) mempty [1..15]
 
+scoresheet ::
+  Diagram B R2
+scoresheet =
+  rowsLeft
+  
 renderChessScoresheet ::
   OutputFormat
   -> SizeSpec2D
@@ -81,14 +86,3 @@ renderChessScoresheets ::
   -> IO ()
 renderChessScoresheets s =
   mapM_ (`renderChessScoresheet` s) [PDF' ..]
-
-cairoRenderScoresheet ::
-  IO ()
-cairoRenderScoresheet =
-  fst (renderDia Cairo (CairoOptions "scoresheet.png" (mkSizeSpec (Just 1200) Nothing) PNG False) scoresheet)
-
-scoresheet ::
-  Diagram B R2
-scoresheet =
-  rowsLeft
-  
