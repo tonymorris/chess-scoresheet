@@ -2,9 +2,13 @@ module Data.Chess.Scoresheet where
 
 import Diagrams.Prelude
 import Diagrams.Backend.Cairo
+import Data.Chess.OutputFormat
 import Data.Colour.SRGB
 import Data.List
+import Diagrams.Backend.Cairo.Internal
 import Prelude
+import System.Directory
+import System.FilePath
 
 {-
 
@@ -62,6 +66,26 @@ rowsLeft ::
   Diagram B R2
 rowsLeft =
   foldr (\a d -> row a === d) mempty [1..15]
+
+renderChessScoresheet ::
+  OutputFormat
+  -> SizeSpec2D
+  -> IO ()
+renderChessScoresheet t s =
+  let outputDirectory = "out"
+  in do createDirectoryIfMissing True outputDirectory
+        fst (renderDia Cairo (CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False) scoresheet)
+
+renderChessScoresheets ::
+  SizeSpec2D
+  -> IO ()
+renderChessScoresheets s =
+  mapM_ (`renderChessScoresheet` s) [PDF' ..]
+
+cairoRenderScoresheet ::
+  IO ()
+cairoRenderScoresheet =
+  fst (renderDia Cairo (CairoOptions "scoresheet.png" (mkSizeSpec (Just 1200) Nothing) PNG False) scoresheet)
 
 scoresheet ::
   Diagram B R2
