@@ -59,8 +59,13 @@ blackshading =
 namebox ::
   Diagram B R2
 namebox =
-  rect 100 10
-
+  let nametext c = alignedText (-0.1) 0 c # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+      ratingtext = alignedText (-0.1) 0 "rating" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+      name c s = nametext c <> rect 300 20 # lc darkblue # fc s # alignL
+      rating s = ratingtext <> rect 78 20 # lc darkblue # fc s # alignL
+      box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
+  in box "white" white === box "black" blackshading
+  
 row ::
   Int
   -> Diagram B R2
@@ -70,7 +75,7 @@ row r =
       whitemove = rect 60 20 # lc darkblue
       blackmove = rect 60 20 # fc (sRGB24 192 192 192) # lc darkblue
       time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc blackshading # lc darkblue
-  in number r ||| whitemove ||| time ||| blackmove ||| time
+  in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
 
 row' ::
   [Int]
@@ -78,10 +83,15 @@ row' ::
 row' =
   foldr ((===) . row) mempty
 
+rows1 ::
+  Diagram B R2
+rows1 =
+  (row' [1..25] ||| row' [26..50]) # centerX
+
 scoresheet ::
   Diagram B R2
 scoresheet =
-   vcat' (with & sep .~ 10) [circle 10, row' [1..25] ||| row' [25..50]]
+   vcat' (with & sep .~ 10) [namebox, rows1]
   
 renderChessScoresheet ::
   OutputFormat
