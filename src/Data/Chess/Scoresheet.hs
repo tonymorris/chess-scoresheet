@@ -51,26 +51,37 @@ example =
 
 -}
 
+blackshading ::
+  Colour Double
+blackshading =
+  sRGB24 217 217 217
+
+namebox ::
+  Diagram B R2
+namebox =
+  rect 100 10
+
 row ::
   Int
   -> Diagram B R2
 row r =
-  let numbertext n = alignedText 1 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.04 # fc white
-      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc (sRGB24 217 217 217)
+  let numbertext n = alignedText 1 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.02 # fc white
+      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc blackshading
       whitemove = rect 60 20 # lc darkblue
       blackmove = rect 60 20 # fc (sRGB24 192 192 192) # lc darkblue
-      time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc (sRGB24 217 217 217) # lc darkblue
+      time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc blackshading # lc darkblue
   in number r ||| whitemove ||| time ||| blackmove ||| time
 
-rowsLeft ::
-  Diagram B R2
-rowsLeft =
-  foldr (\a d -> row a === d) mempty [1..15]
+row' ::
+  [Int]
+  -> Diagram B R2
+row' =
+  foldr ((===) . row) mempty
 
 scoresheet ::
   Diagram B R2
 scoresheet =
-  rowsLeft
+   vcat' (with & sep .~ 10) [circle 10, row' [1..25] ||| row' [25..50]]
   
 renderChessScoresheet ::
   OutputFormat
