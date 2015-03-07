@@ -56,6 +56,11 @@ blackshading ::
 blackshading =
   sRGB24 217 217 217
 
+logo ::
+  IO (Diagram B R2)
+logo =
+  fmap (either text (\l -> image l # sized (Dims 150 150))) (loadImageExt "etc/tgcc-logo.png")
+
 namebox ::
   Diagram B R2
 namebox =
@@ -90,8 +95,9 @@ rows1 =
 
 scoresheet ::
   Diagram B R2
-scoresheet =
-   vcat' (with & sep .~ 10) [namebox, rows1]
+  -> Diagram B R2
+scoresheet l =
+   vcat' (with & sep .~ 10) [l, namebox, rows1]
   
 renderChessScoresheet ::
   OutputFormat
@@ -100,7 +106,8 @@ renderChessScoresheet ::
 renderChessScoresheet t s =
   let outputDirectory = "out"
   in do createDirectoryIfMissing True outputDirectory
-        fst (renderDia Cairo (CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False) scoresheet)
+        l <- logo
+        fst (renderDia Cairo (CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False) (scoresheet l))
 
 renderChessScoresheets ::
   SizeSpec2D
