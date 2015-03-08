@@ -61,6 +61,13 @@ logo ::
 logo =
   fmap (either text (\l -> image l # sized (Dims 150 150))) (loadImageExt "etc/tgcc-logo.png")
 
+logowithurl ::
+  IO (Diagram B R2)
+logowithurl =
+  do l <- logo
+     let u = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+     return (u === l)
+
 namebox ::
   Diagram B R2
 namebox =
@@ -105,9 +112,10 @@ renderChessScoresheet ::
   -> IO ()
 renderChessScoresheet t s =
   let outputDirectory = "out"
+      options = CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False
   in do createDirectoryIfMissing True outputDirectory
-        l <- logo
-        fst (renderDia Cairo (CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False) (scoresheet l))
+        l <- logowithurl
+        fst (renderDia Cairo options (scoresheet l))
 
 renderChessScoresheets ::
   SizeSpec2D
