@@ -75,8 +75,8 @@ row ::
   Int
   -> Diagram B R2
 row r =
-  let numbertext n = alignedText 1 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.02 # fc white
-      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc blackshading
+  let numbertext n = alignedText 1.2 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc white
+      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue
       whitemove = rect 60 20 # lc darkblue
       blackmove = rect 60 20 # fc (sRGB24 192 192 192) # lc darkblue
       time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc blackshading # lc darkblue
