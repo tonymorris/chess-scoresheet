@@ -65,8 +65,9 @@ logowithurl ::
   IO (Diagram B R2)
 logowithurl =
   do l <- logo
-     let u = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
-     return (u === l)
+     let t = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+         r = rect 200 10 # lc white
+     return (((t <> r) === l) # alignR)
 
 namebox ::
   Diagram B R2
