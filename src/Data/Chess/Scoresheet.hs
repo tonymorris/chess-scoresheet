@@ -82,3 +82,8 @@ renderChessScoresheets ::
   -> IO ()
 renderChessScoresheets s =
   mapM_ (`renderChessScoresheet` s) [PDF' ..]
+
+run ::
+  IO ()
+run =
+  renderChessScoresheet PDF' (mkSizeSpec (Just 800) Nothing)
