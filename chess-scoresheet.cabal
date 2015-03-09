@@ -50,6 +50,7 @@ library
   exposed-modules:
                       Data.Chess.Scoresheet
                     , Data.Chess.OutputFormat
+                    , Data.Test
 
 executable circle
   default-language:
