@@ -25,9 +25,9 @@ logowithurl ::
 logowithurl =
   do l <- logo
      let t = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
-         r = rect 200 10 # lc white
+         r = rect 140 10 # lc white
      return ((t <> r) === l)
-
+     
 namebox ::
   Diagram B R2
 namebox =
