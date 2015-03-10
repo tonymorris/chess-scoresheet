@@ -9,14 +9,16 @@ logo ::
   IO (Diagram B R2)
 logo =
   do i <- loadImageExt "etc/test.png"
-     let l = either text (\k -> image k # sized (Dims 420 232)) i
-     return (l === rect 1000 20)
+     let l = either text (\k -> image k # sized (Dims 420 232) # alignL) i
+     -- return (alignL l === alignL (rect 1000 20))
+     return (vcat' (with & sep .~ 10) [l, rect 1000 20 # alignL])
+     -- return (l === rect 1000 20)
 
-renderChessScoresheet ::
+renderIt ::
   OutputType
   -> SizeSpec2D
   -> IO ()
-renderChessScoresheet t s =
+renderIt t s =
   let options = CairoOptions ("/tmp/test.pdf") s t False
   in do l <- logo
         fst (renderDia Cairo options l)
@@ -24,4 +26,4 @@ renderChessScoresheet t s =
 run ::
   IO ()
 run =
-  renderChessScoresheet PDF (mkSizeSpec (Just 800) Nothing)
+  renderIt PDF (mkSizeSpec (Just 800) Nothing)

@@ -18,7 +18,7 @@ blackshading =
 logo ::
   IO (Diagram B R2)
 logo =
-  fmap (either text (\l -> image l # sized (Dims 150 150))) (loadImageExt "etc/tgcc-logo.png")
+  fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
 
 logowithurl ::
   IO (Diagram B R2)
@@ -26,7 +26,7 @@ logowithurl =
   do l <- logo
      let t = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
          r = rect 200 10 # lc white
-     return (((t <> r) === l) # alignR)
+     return ((t <> r) === l)
 
 namebox ::
   Diagram B R2
@@ -64,7 +64,8 @@ scoresheet ::
   Diagram B R2
   -> Diagram B R2
 scoresheet l =
-   vcat' (with & sep .~ 10) [l, namebox, rows1]
+   let r = vcat' (with & sep .~ 10) [namebox, rows1]
+   in vcat' (with & sep .~ 5) [l # alignL, r # alignL]
   
 renderChessScoresheet ::
   OutputFormat
