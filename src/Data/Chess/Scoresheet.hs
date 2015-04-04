@@ -52,7 +52,7 @@ namebox ::
 namebox =
   let nametext c = alignedText (-0.1) 0 c # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
       ratingtext = alignedText (-0.1) 0 "rating" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
-      name c s = nametext c <> rect 300 20 # lc darkblue # fc s # alignL
+      name c s = nametext c <> rect 303 20 # lc darkblue # fc s # alignL
       rating s = ratingtext <> rect 78 20 # lc darkblue # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
   in box "white" whiteshading === box "black" blackshading
@@ -62,10 +62,10 @@ row ::
   -> Diagram B R2
 row r =
   let numbertext n = alignedText 1.2 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc white
-      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue
-      whitemove = rect 60 20 # fc whiteshading # lc darkblue
-      blackmove = rect 60 20 # fc blackshading # lc darkblue
-      time = rect 30 20 # fc timeboxshading # lc darkblue
+      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue # lwG 0.05
+      whitemove = rect 60 20 # fc whiteshading # lc darkblue # lwG 0.05
+      blackmove = rect 60 20 # fc blackshading # lc darkblue # lwG 0.05
+      time = rect 30 20 # fc timeboxshading # lc darkblue # lwG 0.05
   in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
 -- 20 60 30 20 60 30
 rownumbers ::
