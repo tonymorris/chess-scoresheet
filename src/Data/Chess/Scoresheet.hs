@@ -10,24 +10,43 @@ import Prelude
 import System.Directory
 import System.FilePath
 
+whiteshading ::
+  Colour Double
+whiteshading =
+  white
+
 blackshading ::
   Colour Double
 blackshading =
-  sRGB24 217 217 217
+  let g = 232
+  in sRGB24 g g g
 
-logo ::
-  IO (Diagram B R2)
-logo =
-  fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
+timeboxshading ::
+  Colour Double
+timeboxshading =
+  white
 
 logowithurl ::
   IO (Diagram B R2)
 logowithurl =
-  do l <- logo
+  do l <- fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
      let t = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
          r = rect 140 10 # lw none
      return ((t <> r) === l)
      
+{-
+date
+event
+round
+board#
+time control
+remove colon
+number column thinner
+line thinner
+remove shading on time box
+decrease shading for black
+-}
+
 namebox ::
   Diagram B R2
 namebox =
@@ -36,7 +55,7 @@ namebox =
       name c s = nametext c <> rect 300 20 # lc darkblue # fc s # alignL
       rating s = ratingtext <> rect 78 20 # lc darkblue # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
-  in box "white" white === box "black" blackshading
+  in box "white" whiteshading === box "black" blackshading
   
 row ::
   Int
@@ -44,21 +63,21 @@ row ::
 row r =
   let numbertext n = alignedText 1.2 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc white
       number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue
-      whitemove = rect 60 20 # lc darkblue
-      blackmove = rect 60 20 # fc (sRGB24 192 192 192) # lc darkblue
-      time = text ":" # fontSizeN 0.03 # fc darkblue <> rect 30 20 # fc blackshading # lc darkblue
+      whitemove = rect 60 20 # fc whiteshading # lc darkblue
+      blackmove = rect 60 20 # fc blackshading # lc darkblue
+      time = rect 30 20 # fc timeboxshading # lc darkblue
   in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
-
-row' ::
+-- 20 60 30 20 60 30
+rownumbers ::
   [Int]
   -> Diagram B R2
-row' =
+rownumbers =
   foldr ((===) . row) mempty
 
 rows1 ::
   Diagram B R2
 rows1 =
-  (row' [1..25] ||| row' [26..50]) # centerX
+  (rownumbers [1..25] ||| rownumbers [26..50]) # centerX
 
 scoresheet ::
   Diagram B R2
