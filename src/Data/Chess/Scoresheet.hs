@@ -26,11 +26,18 @@ timeboxshading ::
 timeboxshading =
   white
 
+dejavuSansMono ::
+  HasStyle a =>
+  a
+  -> a
+
+dejavuSansMono =
+  font "DejaVu Sans Mono"
 logowithurl ::
   IO (Diagram B R2)
 logowithurl =
   do l <- fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
-     let t = text "http://thegapchessclub.org.au" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+     let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc darkblue
          r = rect 140 10 # lw none
      return ((t <> r) === l)
      
@@ -50,8 +57,8 @@ decrease shading for black
 namebox ::
   Diagram B R2
 namebox =
-  let nametext c = alignedText (-0.1) 0 c # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
-      ratingtext = alignedText (-0.1) 0 "rating" # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc darkblue
+  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeN 0.01 # fc darkblue
+      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeN 0.01 # fc darkblue
       name c s = nametext c <> rect 303 20 # lc darkblue # fc s # alignL
       rating s = ratingtext <> rect 78 20 # lc darkblue # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
@@ -61,7 +68,7 @@ row ::
   Int
   -> Diagram B R2
 row r =
-  let numbertext n = alignedText 1.2 0.5 (show n) # font "DejaVu Sans Mono" # fontSizeN 0.01 # fc white
+  let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeN 0.01 # fc white
       number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue # lwG 0.05
       whitemove = rect 60 20 # fc whiteshading # lc darkblue # lwG 0.05
       blackmove = rect 60 20 # fc blackshading # lc darkblue # lwG 0.05
