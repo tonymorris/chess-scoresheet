@@ -52,6 +52,7 @@ event
 round
 board#
 time control
+result
 remove colon
 number column thinner
 line thinner
@@ -64,7 +65,7 @@ namebox ::
 namebox =
   let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeN 0.01 # fc maincolour
       ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeN 0.01 # fc maincolour
-      name c s = nametext c <> rect 303 20 # lc maincolour # fc s # alignL
+      name c s = nametext c <> rect 300 20 # lc maincolour # fc s # alignL
       rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
   in box "white" whiteshading === box "black" blackshading
