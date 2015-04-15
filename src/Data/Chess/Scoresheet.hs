@@ -63,8 +63,8 @@ decrease shading for black
 namebox ::
   Diagram B R2
 namebox =
-  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeN 0.01 # fc maincolour
-      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeN 0.01 # fc maincolour
+  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeL 5 # fc maincolour
+      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeL 5 # fc maincolour
       name c s = nametext c <> rect 300 20 # lc maincolour # fc s # alignL
       rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
@@ -74,7 +74,7 @@ row ::
   Int
   -> Diagram B R2
 row r =
-  let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeN 0.01 # fc white
+  let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeL 5 # fc white
       number n = numbertext n <> rect 20 20 # alignR # fc maincolour # lc maincolour # lwG 0.05
       whitemove = rect 60 20 # fc whiteshading # lc maincolour # lwG 0.05
       blackmove = rect 60 20 # fc blackshading # lc maincolour # lwG 0.05
