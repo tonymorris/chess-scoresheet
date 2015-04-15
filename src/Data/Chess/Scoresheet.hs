@@ -26,6 +26,11 @@ timeboxshading ::
 timeboxshading =
   white
 
+maincolour ::
+  Colour Double
+maincolour =
+  darkblue
+
 dejavuSansMono ::
   HasStyle a =>
   a
@@ -37,7 +42,7 @@ logowithurl ::
   IO (Diagram B R2)
 logowithurl =
   do l <- fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
-     let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc darkblue
+     let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc maincolour
          r = rect 140 10 # lw none
      return ((t <> r) === l)
      
@@ -57,10 +62,10 @@ decrease shading for black
 namebox ::
   Diagram B R2
 namebox =
-  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeN 0.01 # fc darkblue
-      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeN 0.01 # fc darkblue
-      name c s = nametext c <> rect 303 20 # lc darkblue # fc s # alignL
-      rating s = ratingtext <> rect 78 20 # lc darkblue # fc s # alignL
+  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeN 0.01 # fc maincolour
+      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeN 0.01 # fc maincolour
+      name c s = nametext c <> rect 303 20 # lc maincolour # fc s # alignL
+      rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
   in box "white" whiteshading === box "black" blackshading
   
@@ -69,10 +74,10 @@ row ::
   -> Diagram B R2
 row r =
   let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeN 0.01 # fc white
-      number n = numbertext n <> rect 20 20 # alignR # fc darkblue # lc darkblue # lwG 0.05
-      whitemove = rect 60 20 # fc whiteshading # lc darkblue # lwG 0.05
-      blackmove = rect 60 20 # fc blackshading # lc darkblue # lwG 0.05
-      time = rect 30 20 # fc timeboxshading # lc darkblue # lwG 0.05
+      number n = numbertext n <> rect 20 20 # alignR # fc maincolour # lc maincolour # lwG 0.05
+      whitemove = rect 60 20 # fc whiteshading # lc maincolour # lwG 0.05
+      blackmove = rect 60 20 # fc blackshading # lc maincolour # lwG 0.05
+      time = rect 30 20 # fc timeboxshading # lc maincolour # lwG 0.05
   in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
 -- 20 60 30 20 60 30
 rownumbers ::
