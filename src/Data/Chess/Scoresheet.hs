@@ -1,3 +1,4 @@
+-- http://projects.haskell.org/diagrams/doc/manual.html
 module Data.Chess.Scoresheet where
 
 import Diagrams.Prelude
