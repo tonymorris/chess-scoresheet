@@ -11,25 +11,6 @@ import Prelude hiding (round)
 import System.Directory
 import System.FilePath
 
-data Params =
-  Params
-    (Colour Double) -- whiteshading
-    (Colour Double) -- blackshading
-    (Colour Double) -- timebox shading
-    (Colour Double) -- main colour
-    String -- main font
-
-testParams ::
-  Params
-testParams =
-  let g = 232
-  in Params 
-       white
-       (sRGB24 g g g)
-       white
-       darkblue
-      "DejaVu Sans Mono"
-
 whiteshading ::
   Colour Double
 whiteshading =
@@ -72,13 +53,6 @@ logowithurl =
        return ((t <> r) === l)
      
 {-
-date
-event
-round
-board#
-time control
-result
-
 
 remove colon
 number column thinner
@@ -151,3 +125,24 @@ renderChessScoresheets ::
   -> IO ()
 renderChessScoresheets s =
   mapM_ (`renderChessScoresheet` s) [PDF' ..]
+
+{-
+data Params =
+  Params
+    (Colour Double) -- whiteshading
+    (Colour Double) -- blackshading
+    (Colour Double) -- timebox shading
+    (Colour Double) -- main colour
+    String -- main font
+
+testParams ::
+  Params
+testParams =
+  let g = 232
+  in Params 
+       white
+       (sRGB24 g g g)
+       white
+       darkblue
+      "DejaVu Sans Mono"
+-}
