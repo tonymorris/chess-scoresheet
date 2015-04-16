@@ -53,6 +53,8 @@ round
 board#
 time control
 result
+
+
 remove colon
 number column thinner
 line thinner
@@ -65,8 +67,8 @@ namebox ::
 namebox =
   let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeL 5 # fc maincolour
       ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeL 5 # fc maincolour
-      name c s = nametext c <> rect 300 20 # lc maincolour # fc s # alignL
-      rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # alignL
+      name c s = nametext c <> rect 290 20 # lc maincolour # fc s # lwL 1.2 # alignL
+      rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # lwL 1.2 # alignL
       box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
   in box "white" whiteshading === box "black" blackshading
   
@@ -75,10 +77,10 @@ row ::
   -> Diagram B R2
 row r =
   let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeL 5 # fc white
-      number n = numbertext n <> rect 20 20 # alignR # fc maincolour # lc maincolour # lwG 0.05
-      whitemove = rect 60 20 # fc whiteshading # lc maincolour # lwG 0.05
-      blackmove = rect 60 20 # fc blackshading # lc maincolour # lwG 0.05
-      time = rect 30 20 # fc timeboxshading # lc maincolour # lwG 0.05
+      number n = numbertext n <> rect 18 20 # alignR # fc maincolour # lc maincolour # lwL 0.2
+      whitemove = rect 60 20 # fc whiteshading # lc maincolour # lwL 0.2
+      blackmove = rect 60 20 # fc blackshading # lc maincolour # lwL 0.2
+      time = rect 30 20 # fc timeboxshading # lc maincolour # lwL 0.2
   in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
 -- 20 60 30 20 60 30
 rownumbers ::
