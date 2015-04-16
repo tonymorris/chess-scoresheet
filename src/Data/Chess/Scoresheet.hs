@@ -7,7 +7,7 @@ import Data.Chess.OutputFormat
 import Data.Colour.SRGB
 import Data.List
 import Diagrams.Backend.Cairo.Internal
-import Prelude
+import Prelude hiding (round)
 import System.Directory
 import System.FilePath
 
@@ -36,13 +36,13 @@ dejavuSansMono ::
   HasStyle a =>
   a
   -> a
-
 dejavuSansMono =
   font "DejaVu Sans Mono"
+
 logowithurl ::
   IO (Diagram B R2)
 logowithurl =
-  do l <- fmap (either text (\l -> image l # sized (Dims 140 77.33))) (loadImageExt "etc/tgcc-logo.png")
+  do l <- fmap (either text (\l -> image l # sized (Dims 120 66.29))) (loadImageExt "etc/tgcc-logo.png")
      let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc maincolour
          r = rect 140 10 # lw none
      return ((t <> r) === l)
@@ -109,9 +109,17 @@ renderChessScoresheet ::
 renderChessScoresheet t s =
   let outputDirectory = "out"
       options = CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False
+      textbox c = alignedText (-0.1) (-0.5) c # dejavuSansMono # fontSizeL 4 # fc maincolour
+      event = textbox "event" <> rect 171 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      date  = textbox "date" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      round  = textbox "round" <> rect 50 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      board  = textbox "board" <> rect 50 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      time  = textbox "time" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      result  = textbox "result" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      box = (event ||| date) === (round ||| board ||| time ||| result)
   in do createDirectoryIfMissing True outputDirectory
         l <- logowithurl
-        fst (renderDia Cairo options (scoresheet l))
+        fst (renderDia Cairo options (scoresheet (hcat' (with & sep .~ 10) [l, box])))
 
 renderChessScoresheets ::
   SizeSpec2D
