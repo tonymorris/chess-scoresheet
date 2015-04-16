@@ -107,7 +107,7 @@ renderChessScoresheet ::
 renderChessScoresheet t s =
   let outputDirectory = "out"
       options = CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False
-      textbox c = alignedText (-0.1) (-0.5) c # dejavuSansMono # fontSizeL 4 # fc maincolour
+      textbox c = alignedText (-0.1) (-0.3) c # dejavuSansMono # fontSizeL 4 # fc maincolour
       labelbox c w = textbox c <> rect w 20 # lc maincolour # fc white # lwL 1.2 # alignL      
       event = labelbox "event" 171
       date  = labelbox "date" 71
