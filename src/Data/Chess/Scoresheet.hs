@@ -11,6 +11,25 @@ import Prelude hiding (round)
 import System.Directory
 import System.FilePath
 
+data Params =
+  Params
+    (Colour Double) -- whiteshading
+    (Colour Double) -- blackshading
+    (Colour Double) -- timebox shading
+    (Colour Double) -- main colour
+    String -- main font
+
+testParams ::
+  Params
+testParams =
+  let g = 232
+  in Params 
+       white
+       (sRGB24 g g g)
+       white
+       darkblue
+      "DejaVu Sans Mono"
+
 whiteshading ::
   Colour Double
 whiteshading =
@@ -42,10 +61,15 @@ dejavuSansMono =
 logowithurl ::
   IO (Diagram B R2)
 logowithurl =
-  do l <- fmap (either text (\l -> image l # sized (Dims 120 66.29))) (loadImageExt "etc/tgcc-logo.png")
-     let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc maincolour
-         r = rect 140 10 # lw none
-     return ((t <> r) === l)
+  let logowidth = 420
+      logoheight = 232
+      logoscale = 3.5
+      logodims = Dims (logowidth / logoscale) (logoheight / logoscale)
+  in
+    do l <- fmap (either text (\l -> image l # sized logodims)) (loadImageExt "etc/tgcc-logo.png")
+       let t = text "http://thegapchessclub.org.au" # dejavuSansMono # fontSizeL 5 # fc maincolour
+           r = rect 140 10 # lw none
+       return ((t <> r) === l)
      
 {-
 date
@@ -110,12 +134,13 @@ renderChessScoresheet t s =
   let outputDirectory = "out"
       options = CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False
       textbox c = alignedText (-0.1) (-0.5) c # dejavuSansMono # fontSizeL 4 # fc maincolour
-      event = textbox "event" <> rect 171 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      date  = textbox "date" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      round  = textbox "round" <> rect 50 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      board  = textbox "board" <> rect 50 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      time  = textbox "time" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      result  = textbox "result" <> rect 71 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      labelbox c w = textbox c <> rect w 20 # lc maincolour # fc white # lwL 1.2 # alignL      
+      event = labelbox "event" 171
+      date  = labelbox "date" 71
+      round  = labelbox "round" 50
+      board  = labelbox "board" 50
+      time  = labelbox "time" 71
+      result  = labelbox "result" 71
       box = (event ||| date) === (round ||| board ||| time ||| result)
   in do createDirectoryIfMissing True outputDirectory
         l <- logowithurl
