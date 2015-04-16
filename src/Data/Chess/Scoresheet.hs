@@ -64,11 +64,9 @@ decrease shading for black
 namebox ::
   Diagram B R2
 namebox =
-  let nametext c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeL 5 # fc maincolour
-      ratingtext = alignedText (-0.1) 0 "rating" # dejavuSansMono # fontSizeL 5 # fc maincolour
-      name c s = nametext c <> rect 290 20 # lc maincolour # fc s # lwL 1.2 # alignL
-      rating s = ratingtext <> rect 78 20 # lc maincolour # fc s # lwL 1.2 # alignL
-      box c s = hcat' (with & sep .~ 20) [name c s, rating s] # centerX
+  let textbox c = alignedText (-0.1) 0 c # dejavuSansMono # fontSizeL 5 # fc maincolour
+      labelbox c w s = textbox c <> rect w 20 # lc maincolour # fc s # lwL 1.2 # alignL
+      box c s = hcat' (with & sep .~ 20) [labelbox c 290 s, labelbox "rating" 78 s] # centerX
   in box "white" whiteshading === box "black" blackshading
   
 row ::
