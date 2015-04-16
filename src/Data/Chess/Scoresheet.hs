@@ -74,11 +74,12 @@ row ::
   -> Diagram B R2
 row r =
   let numbertext n = alignedText 1.2 0.5 (show n) # dejavuSansMono # fontSizeL 5 # fc white
-      number n = numbertext n <> rect 18 20 # alignR # fc maincolour # lc maincolour # lwL 0.2
-      rowrect s w = rect w 20 # fc s # lc maincolour # lwL 0.2
-      whitemove = rowrect whiteshading 60
-      blackmove =rowrect blackshading 60
-      time = rowrect timeboxshading 30
+      rowrect s w a = rect w 20 # a # fc s # lc maincolour # lwL 0.2
+      rowrect' s w = rowrect s w id
+      number n = numbertext n <> rowrect maincolour 18 alignR
+      whitemove = rowrect' whiteshading 60
+      blackmove =rowrect' blackshading 60
+      time = rowrect' timeboxshading 30
   in number r ||| whitemove ||| time ||| blackmove ||| time # centerX
 -- 20 60 30 20 60 30
 
