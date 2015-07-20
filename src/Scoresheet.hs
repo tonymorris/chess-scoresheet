@@ -1,7 +1,7 @@
 module Main where
 
--- import Data.Chess.Scoresheet
-import Data.Test
+import Data.Chess.Scoresheet
+-- import Data.Test
 import Data.Maybe
 import Diagrams.Prelude
 import System.IO(IO)
@@ -9,4 +9,4 @@ import System.IO(IO)
 main ::
   IO ()
 main =
-  run -- renderChessScoresheets (mkSizeSpec (Just 800) Nothing)
+  renderChessScoresheets (mkSizeSpec (V2 (Just 800) Nothing))

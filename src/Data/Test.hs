@@ -1,5 +1,6 @@
 module Data.Test where
 
+import Data.Chess.OutputFormat
 import Diagrams.Prelude
 import Diagrams.Backend.Cairo
 import Diagrams.Backend.Cairo.Internal
@@ -16,16 +17,16 @@ logo =
      -- return (l === rect 1000 20)
 
 renderIt :: 
-  OutputType
+  OutputFormat
   -> SizeSpec V2 Double
   -> IO ()
 renderIt t s =
-  let options = CairoOptions ("/tmp/test.pdf") s t False
+  let options = CairoOptions ("/tmp/test.pdf") s (formatType t) False
   in do l <- logo
         fst (renderDia Cairo options l)
 
 run ::
   IO ()
 run =
-  renderIt PDF (mkSizeSpec (V2 (Just 800) Nothing))
+  renderIt PDF' (mkSizeSpec (V2 (Just 800) Nothing))
 

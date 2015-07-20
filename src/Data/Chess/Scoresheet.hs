@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE TypeFamilies #-}
 
 -- http://projects.haskell.org/diagrams/doc/manual.html
 module Data.Chess.Scoresheet where
@@ -6,7 +7,6 @@ module Data.Chess.Scoresheet where
 import Diagrams.Prelude
 import Diagrams.Backend.Cairo
 import Data.Chess.OutputFormat
-import Data.Colour.SRGB
 import Data.List
 import Diagrams.Backend.Cairo.Internal
 import Prelude hiding (round)
@@ -70,7 +70,7 @@ namebox =
       labelbox c w s = textbox c <> rect w 20 # lc maincolour # fc s # lwL 1.2 # alignL
       box c s = hcat' (with & sep .~ 20) [labelbox c 290 s, labelbox "rating" 78 s] # centerX
   in box "white" whiteshading === box "black" blackshading
-  
+
 row ::
   Int
   -> Diagram B
@@ -105,7 +105,7 @@ scoresheet l =
   
 
 renderChessScoresheet ::
-  OutputType
+  OutputFormat 
   -> SizeSpec V2 Double
   -> IO ()
 renderChessScoresheet t s =
@@ -128,7 +128,7 @@ renderChessScoresheets ::
   SizeSpec V2 Double
   -> IO ()
 renderChessScoresheets s =
-  mapM_ (`renderChessScoresheet` s) undefined -- [PDF' ..]
+  mapM_ (`renderChessScoresheet` s) [PDF' ..]
 
 {-
 data Params =
