@@ -48,7 +48,7 @@ library
                     src
 
   exposed-modules:
-                      Data.Chess.Scoresheet
+                    Data.Chess.Scoresheet
                     , Data.Chess.OutputFormat
                     , Data.Test
 

@@ -5,18 +5,19 @@ import Diagrams.Backend.Cairo
 import Diagrams.Backend.Cairo.Internal
 import Prelude
 
+
 logo ::
-  IO (Diagram B R2)
+  IO (Diagram B)
 logo =
   do i <- loadImageExt "etc/test.png"
-     let l = either text (\k -> image k # sized (Dims 420 232) # alignL) i
+     let l = either text (\k -> image k # sized (dims2D 420 232) # alignL) i
      -- return (alignL l === alignL (rect 1000 20))
      return (vcat' (with & sep .~ 10) [l, rect 1000 20 # alignL])
      -- return (l === rect 1000 20)
 
-renderIt ::
+renderIt :: 
   OutputType
-  -> SizeSpec2D
+  -> SizeSpec V2 Double
   -> IO ()
 renderIt t s =
   let options = CairoOptions ("/tmp/test.pdf") s t False
@@ -26,4 +27,5 @@ renderIt t s =
 run ::
   IO ()
 run =
-  renderIt PDF (mkSizeSpec (Just 800) Nothing)
+  renderIt PDF (mkSizeSpec (V2 (Just 800) Nothing))
+
