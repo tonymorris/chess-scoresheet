@@ -94,7 +94,7 @@ rownumbers =
 rows1 ::
   Diagram B
 rows1 =
-  (rownumbers [1..25] ||| rownumbers [26..50]) # centerX
+  (rownumbers [1..2] ||| rownumbers [3..4]) # centerX
 
 scoresheet ::
   Diagram B
@@ -103,6 +103,12 @@ scoresheet l =
    let r = vcat' (with & sep .~ 10) [namebox, rows1]
    in vcat' (with & sep .~ 5) [l # alignL, r # alignL]
   
+detailbox ::
+  Diagram B
+detailbox =
+  let textbox c = alignedText (-0.1) (-0.3) c # dejavuSansMono # fontSizeL 4 # fc maincolour
+      labelbox c w = textbox c <> rect w 40 # lc maincolour # fc white # lwL 1.2 # alignL      
+  in labelbox "event" 242
 
 renderChessScoresheet ::
   OutputFormat 
@@ -111,18 +117,9 @@ renderChessScoresheet ::
 renderChessScoresheet t s =
   let outputDirectory = "out"
       options = CairoOptions (outputDirectory </> "chess-scoresheet" <//> t) s (formatType t) False
-      textbox c = alignedText (-0.1) (-0.3) c # dejavuSansMono # fontSizeL 4 # fc maincolour
-      labelbox c w = textbox c <> rect w 20 # lc maincolour # fc white # lwL 1.2 # alignL      
-      event = labelbox "event" 171
-      date  = labelbox "date" 71
-      round  = labelbox "round" 50
-      board  = labelbox "board" 50
-      time  = labelbox "time" 71
-      result  = labelbox "result" 71
-      box = (event ||| date) === (round ||| board ||| time ||| result)
   in do createDirectoryIfMissing True outputDirectory
         l <- logowithurl
-        fst (renderDia Cairo options (scoresheet (hcat' (with & sep .~ 10) [l, box])))
+        fst (renderDia Cairo options (scoresheet (hcat' (with & sep .~ 10) [l, detailbox])))
 
 renderChessScoresheets ::
   SizeSpec V2 Double
